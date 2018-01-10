@@ -20,7 +20,10 @@ grad = zeros(size(theta));
 % Note: grad should have the same dimensions as theta
 %
 
-
+size(theta)
+size(X)
+size(y)
+size(grad)
 
 
 
