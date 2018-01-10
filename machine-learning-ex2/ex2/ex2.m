@@ -54,6 +54,13 @@ pause;
 %  for logistic regression. You neeed to complete the code in 
 %  costFunction.m
 
+% test sigmoid 
+sigmoid(100)
+sigmoid(10)
+sigmoid(0)
+sigmoid(-10)
+sigmoid(-100)
+
 %  Setup the data matrix appropriately, and add ones for the intercept term
 [m, n] = size(X);
 
