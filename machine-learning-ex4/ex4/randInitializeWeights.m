@@ -1,4 +1,6 @@
 function W = randInitializeWeights(L_in, L_out)
+% L_in  is # of columns (in ex4)
+% L_out is # of rows    (in ex4)
 %RANDINITIALIZEWEIGHTS Randomly initialize the weights of a layer with L_in
 %incoming connections and L_out outgoing connections
 %   W = RANDINITIALIZEWEIGHTS(L_in, L_out) randomly initializes the weights 
@@ -19,6 +21,9 @@ W = zeros(L_out, 1 + L_in);
 % Note: The first column of W corresponds to the parameters for the bias unit
 %
 
+% Randomly initialize the weights to small values
+epsilon init = 0.12;
+W = rand(L out, 1 + L in) * 2 * epsilon init − epsilon init;
 
 
 
