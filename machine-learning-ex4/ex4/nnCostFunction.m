@@ -50,6 +50,10 @@ a2 = sigmoid( [ones(m,1) X] * Theta1' );
 a3 = sigmoid( [ones(m,1) a2] * Theta2' ); % a3 is hypothesis.
 
 J = (1/m) * sum(sum( -Y.*log(a3) - (1 - Y).*log(1 - a3)));
+% regularization 
+J = J + (lambda/(2*m)) * (sum(sum(Theta1(:,2:end).^2))
+                          +
+                          sum(sum(Theta2(:,2:end).^2)))
 
 % Part 2: Implement the backpropagation algorithm to compute the gradients
 %         Theta1_grad and Theta2_grad. You should return the partial derivatives of
