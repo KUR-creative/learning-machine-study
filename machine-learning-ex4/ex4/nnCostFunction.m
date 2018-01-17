@@ -105,7 +105,14 @@ Theta1_grad = Theta1_grad / m;
 %               the regularization separately and then add them to Theta1_grad
 %               and Theta2_grad from Part 2.
 
+%zeros(hidden_layer_size,1)
+reg_factor2 = (lambda/m)*Theta2;
+reg_factor2(:,1) = 0;
+Theta2_grad = Theta2_grad + reg_factor2;
 
+reg_factor1 = (lambda/m)*Theta1;
+reg_factor1(:,1) = 0;
+Theta1_grad = Theta1_grad + reg_factor1;
 % -------------------------------------------------------------
 
 % =========================================================================
