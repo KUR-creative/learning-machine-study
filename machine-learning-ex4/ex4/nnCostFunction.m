@@ -3,6 +3,8 @@ function [J grad] = nnCostFunction(nn_params, ...
                                    hidden_layer_size, ...
                                    num_labels, ...
                                    X, y, lambda)
+% # of labels = # of output layer
+
 %NNCOSTFUNCTION Implements the neural network cost function for a two layer
 %neural network which performs classification
 %   [J grad] = NNCOSTFUNCTON(nn_params, hidden_layer_size, num_labels, ...
@@ -47,8 +49,10 @@ size(y);
 Y = eye(num_labels)(y,:);
 size(Y);
 
-z2 = [ones(m,1) X]  * Theta1';  a2 = sigmoid(z2);
-z3 = [ones(m,1) a2] * Theta2';  a3 = sigmoid(z3); % a3 is hypothesis.
+z2 = [ones(m,1) X]  * Theta1';  
+a2 = sigmoid(z2);
+z3 = [ones(m,1) a2] * Theta2'; 
+a3 = sigmoid(z3); % a3 is hypothesis.
 
 size(X);
 size(a2);
@@ -77,6 +81,21 @@ J = J + (lambda/(2*m)) * (sum(sum(Theta1(:,2:end).^2))
 %         Hint: We recommend implementing backpropagation using a for-loop
 %               over the training examples if you are implementing it for the 
 %               first time.
+
+error3 = a3 - Y;
+error2 = error3 * Theta2(:,2:end) .* sigmoidGradient(z2);
+
+Theta2_grad = Theta2_grad + sum(reshape(error3', num_labels,1,m) 
+                                .* 
+                                reshape([ones(m,1) a2]', 1,hidden_layer_size+1,m), 
+                                3);
+
+Theta1_grad = Theta1_grad + sum(reshape(error2', hidden_layer_size,1,m)
+                                .*
+                                reshape([ones(m,1) X]', 1,input_layer_size+1,m),
+                                3);
+Theta2_grad = Theta2_grad / m;
+Theta1_grad = Theta1_grad / m;
 
 
 % Part 3: Implement regularization with the cost function and gradients.
